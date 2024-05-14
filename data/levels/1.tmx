@@ -274,7 +274,7 @@
 </data>
  </layer>
  <objectgroup id="6" name="Objects">
-  <object id="1" name="player" gid="75" x="104.39" y="3214.79" width="74" height="56"/>
+  <object id="1" name="player" gid="75" x="90.39" y="3084.79" width="74" height="56"/>
   <object id="6" name="palm_bg_right" gid="61" x="162" y="3503" width="104" height="106"/>
   <object id="7" name="palm_bg_left" gid="60" x="1014" y="3549" width="104" height="106"/>
   <object id="15" name="barrel" gid="49" x="249" y="2755" width="46" height="50"/>

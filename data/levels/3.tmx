@@ -679,7 +679,7 @@
     <property name="bottom_limit" type="int" value="200"/>
     <property name="death_border" type="int" value="0"/>
     <property name="horizon_line" type="int" value="0"/>
-    <property name="level_unlock" type="int" value="2"/>
+    <property name="level_unlock" type="int" value="3"/>
     <property name="top_limit" type="int" value="0"/>
    </properties>
   </object>

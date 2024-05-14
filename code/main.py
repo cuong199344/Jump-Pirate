@@ -57,7 +57,7 @@ class Game:
         self.clock = pygame.time.Clock()
 
         self.import_assets()
-
+        self.text_font = pygame.font.Font('./font/Pixeltype.ttf', 60)
         self.ui = UI(self.font, self.ui_frames)
         self.data = Data(self.ui)
         self.tmx_maps = {
@@ -175,10 +175,16 @@ class Game:
                 if event.type == pygame.QUIT:
                     pygame.quit()
                     sys.exit()
+                if self.data.health <= 0 or self.data.unlocked_level == 3:
+                    if event.type == pygame.KEYDOWN:
+                        pygame.quit()
+                        sys.exit()
 
-            self.check_game_over()
+
             self.current_stage.run(dt)
             self.ui.update(dt)
+            self.check_game_over()
+
             pygame.display.update()
 
     def check_game_over(self):
@@ -187,8 +193,36 @@ class Game:
         Phương thức này kiểm tra xem người chơi có hết máu (`self.data.health`) hay không. Nếu hết máu, trò chơi sẽ kết thúc
         """
         if self.data.health <= 0:
-            pygame.quit()
-            sys.exit()
+            self.display_surface.fill((94, 129, 162))
+
+            self.score_message = self.text_font.render(f"Your score: {self.data.coins}", False, (111, 196, 169))
+            self.score_message_rect = self.score_message.get_rect(center=(300, 250))
+
+            self.gameover_message = self.text_font.render("Game Over", False, (111, 196, 169))
+            self.gameover_message_rect = self.score_message.get_rect(center=(500, 400))
+
+            self.over_message = self.text_font.render("PRESS ANY KEY TO EXIT THE GAME", False, (111, 196, 169))
+            self.over_message_rect = self.score_message.get_rect(center=(700, 550))
+
+            self.display_surface.blit(self.score_message, self.score_message_rect)
+            self.display_surface.blit(self.gameover_message, self.gameover_message_rect)
+            self.display_surface.blit(self.over_message, self.over_message_rect)
+
+        if self.data.unlocked_level == 3:
+            self.display_surface.fill((94, 129, 162))
+
+            self.score_message = self.text_font.render(f"Your score: {self.data.coins}", False, (111, 196, 169))
+            self.score_message_rect = self.score_message.get_rect(center=(300, 250))
+
+            self.gameover_message = self.text_font.render("VICTORY !!!", False, (111, 196, 169))
+            self.gameover_message_rect = self.score_message.get_rect(center=(500, 400))
+
+            self.over_message = self.text_font.render("PRESS ANY KEY TO EXIT THE GAME", False, (111, 196, 169))
+            self.over_message_rect = self.score_message.get_rect(center=(700, 550))
+
+            self.display_surface.blit(self.score_message, self.score_message_rect)
+            self.display_surface.blit(self.gameover_message, self.gameover_message_rect)
+            self.display_surface.blit(self.over_message, self.over_message_rect)
 
 
 if __name__ == "__main__":
